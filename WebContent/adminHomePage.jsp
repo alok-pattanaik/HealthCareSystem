@@ -3,9 +3,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript">
+	window.history.forward();
+	function noBack()
+	{
+		window.history.forward();
+	}
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Admin Home Page</title>
 <link rel="stylesheet" type="text/css" href="css/LoginRegister.css">
+
 </head>
 <body>
 	<%
@@ -47,7 +55,7 @@
 					</footer>
 					<%
 						} else
-							response.sendRedirect("login.jsp");
+							response.sendRedirect("errorPage.jsp");
 					%>
 					<!--<h1>Admin HomePage</h1>
 	 <form action="CreateCenterServlet" method="post">

@@ -51,7 +51,7 @@
 				</tr> -->
 				<tr>
 					<td>New Password:</td>
-					<td><input type="password" name="newPassword" id="password"
+					<td><input type="password" name="newPassword" id="newPassword"
 						pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$"
 						title="Password should contain\nA capital letter\nA special character\nA digit\nMaximum length : 14"
 						maxlength="14" required></td>
@@ -59,7 +59,7 @@
 				<tr>
 					<td>Confirm Password:</td>
 					<td><input type="password" name="confirmPassword"
-						id="password"
+						id="confirmPassword"
 						pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$"
 						required></td>
 				</tr>

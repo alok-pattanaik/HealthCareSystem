@@ -8,19 +8,20 @@ import javax.persistence.PersistenceException;
 import org.apache.log4j.Logger;
 
 import com.cg.hcs.entity.Users;
-import com.cg.hcs.exception.HCSException;
+import com.cg.hcs.exception.UserException;
 import com.cg.hcs.utility.JpaUtility;
 
 /***************************************
  * 
- * Description : HealthCareSystem Profile DAO Implementation
+ * Description : This class deals with com.cg.hcs.entity.Users in the database
  * 
  * @author : Reshma, Yashaswini, Bhavani
  * @Date : 20/10/2020
  * 
  ***************************************/
 
-public class UserDAOImpl implements IUserDAO{
+public class UserDAOImpl implements IUserDAO
+{
 	
 	static final EntityManagerFactory factory = JpaUtility.getFactory();
 	EntityManager manager = null;
@@ -35,10 +36,11 @@ public class UserDAOImpl implements IUserDAO{
 	 * @arg1 : Users
 	 * 
 	 * @returns: String
-	 * @Exception : HCSException
+	 * @Exception : UserException
 	 ***********************************/
 	@Override
-	public String register(Users user) throws HCSException {
+	public String register(Users user) throws UserException 
+	{
 		manager = factory.createEntityManager();
 		transaction = manager.getTransaction();
 		transaction.begin();
@@ -53,7 +55,7 @@ public class UserDAOImpl implements IUserDAO{
 			
 			if (transaction.isActive())
 				transaction.rollback();
-			throw new HCSException("Error while registering the new user");
+			throw new UserException("Error while registering the new user");
 		} finally {
 			manager.close();
 		}
@@ -67,21 +69,26 @@ public class UserDAOImpl implements IUserDAO{
 	 * @arg1 : String
 	 * 
 	 * @returns: String
-	 * @Exception : HCSException
+	 * @Exception : UserException
 	 * 
 	 ***********************************/
 
 	@Override
-	public String getRoleCode(String userId) throws HCSException {
+	public String getRoleCode(String userId) throws UserException {
 
 		manager = factory.createEntityManager();
 		Users user = null;
 
-		try {
+		try 
+		{
 			user = manager.find(Users.class, userId);
-		} catch (PersistenceException e) {
-			throw new HCSException("Error while retreiving the role code");
-		} finally {
+		}
+		catch (PersistenceException e)
+		{
+			throw new UserException("Error while retreiving the role code");
+		}
+		finally 
+		{
 			manager.close();
 		}
 		return user.getUserRole();
@@ -94,10 +101,10 @@ public class UserDAOImpl implements IUserDAO{
 	 * @arg1 : String,String
 	 * 
 	 * @returns: Boolean
-	 * @Exception : HCSException
+	 * @Exception : UserException
 	 ***********************************/
 	@Override
-	public boolean validateUser(String userId, String password) throws HCSException {
+	public boolean validateUser(String userId, String password) throws UserException {
 
 		manager = factory.createEntityManager();
 		Users user = null;
@@ -114,7 +121,7 @@ public class UserDAOImpl implements IUserDAO{
 		} catch (PersistenceException e) {
 			LOGGER.info("Error while validating the user");
 			
-			throw new HCSException("Error while validating user");
+			throw new UserException("Error while validating user");
 		} finally {
 			manager.close();
 		}
@@ -128,10 +135,11 @@ public class UserDAOImpl implements IUserDAO{
 	 * @arg1 : User
 	 * 
 	 * @returns: Boolean
-	 * @Exception : HCSException
+	 * @Exception : UserException
 	 ***********************************/
 	@Override
-	public boolean editProfile(Users user) throws HCSException {
+	public boolean editProfile(Users user) throws UserException 
+	{
 		manager = factory.createEntityManager();
 		transaction = manager.getTransaction();
 		try {
@@ -145,10 +153,14 @@ public class UserDAOImpl implements IUserDAO{
 			manager.persist(usr);
 			transaction.commit();
 			return true;
-		}catch (PersistenceException e) {
+		}
+		catch (PersistenceException e) 
+		{
 			LOGGER.info("Error while editing profile");	
-			throw new HCSException("Error while editing profile");
-		}  finally {
+			throw new UserException("Error while editing profile");
+		}
+		finally
+		{
 			manager.close();
 		}
 		
@@ -161,10 +173,10 @@ public class UserDAOImpl implements IUserDAO{
 	 * @arg1 : String,String
 	 * 
 	 * @returns: Boolean
-	 * @Exception : HCSException
+	 * @Exception : UserException
 	 ***********************************/
 	@Override
-	public boolean changePassword(String userId, String password) throws HCSException {
+	public boolean changePassword(String userId, String password) throws UserException {
 		manager = factory.createEntityManager();
 		transaction = manager.getTransaction();
 		Users user = null;
@@ -182,7 +194,7 @@ public class UserDAOImpl implements IUserDAO{
 			LOGGER.info("Error while retriving the user details.");
 			if (transaction.isActive())
 				transaction.rollback();
-			throw new HCSException("Error while retreiving user");
+			throw new UserException("Error while retreiving user");
 		} finally {
 			manager.close();
 		}
@@ -196,33 +208,49 @@ public class UserDAOImpl implements IUserDAO{
 	 * @arg1 : String
 	 * 
 	 * @returns: String
-	 * @Exception : HCSException
+	 * @Exception : UserException
 	 * 
 	 ***********************************/
 	@Override
-	public String getUsername(String userId) throws HCSException {
+	public String getUsername(String userId) throws UserException {
 		manager = factory.createEntityManager();
 		transaction = manager.getTransaction();
 
 		Users user = null;
 
-		try {		
+		try 
+		{		
 			transaction.begin();
 			user = manager.find(Users.class, userId);
 			transaction.commit();
 			return user.getUserName();
-		} catch (RuntimeException e) {
+		}
+		catch (RuntimeException e) 
+		{
 			if (transaction.isActive())
 				transaction.rollback();
-			throw new HCSException("Error while retrieving data");
-		} finally {
+			throw new UserException("Error while retrieving username due to "+e.getMessage());
+		}
+		finally 
+		{
 			manager.close();
 		}
 			
 	}
 	
+	
+	/***********************************
+	 * 
+	 * @Description : Method to retrieve the user object using userId
+	 * @Author : Alok Pattnaik
+	 * @arg1 : String
+	 * 
+	 * @returns: String
+	 * @Exception : UserException
+	 * 
+	 ***********************************/
 	@Override
-	public Users getUser(String userId) throws HCSException {
+	public Users getUser(String userId) throws UserException {
 
 		manager = factory.createEntityManager();
 		transaction = manager.getTransaction();
@@ -236,12 +264,16 @@ public class UserDAOImpl implements IUserDAO{
 			user = manager.find(Users.class, userId);
 			transaction.commit();
 			return user;
-		} catch (RuntimeException e) {
+		} 
+		catch (PersistenceException e) 
+		{
 			LOGGER.info("Error while retriving the user details.");
 			if (transaction.isActive())
 				transaction.rollback();
-			throw new HCSException("Error while retreiving user");
-		} finally {
+			throw new UserException("Error while retreiving user due to "+e.getMessage());
+		}
+		finally 
+		{
 			manager.close();
 		}
 

@@ -7,6 +7,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript">
+	window.history.forward();
+	function noBack()
+	{
+		window.history.forward();
+	}
+</script>
 <meta charset="ISO-8859-1">
 <title>Approve Reject Appointment</title>
 </head>
@@ -25,7 +32,7 @@
 			</div>
 			<nav>
 				<ul>
-				<li><a href="viewAllCenters.jsp">View Centers</a></li>
+				
 					<li><a href="adminHomePage.jsp">Home</a></li>
 					<li><a href="LogoutServlet">Logout</a></li>
 				</ul>
@@ -64,9 +71,9 @@
 					<% 
 					} else {
 			%>
-		<div class="box">
+		<div class="box" style="width:90%">
 	<div class="tableFixHead">
-		<table border="4" ,class="table-style" cellpadding="15%">
+		<table border="4" ,class="table-style" cellpadding="15%" style="width:100%">
 			<tr class="table-heading">
 				<th>Appointment Id
 				<th>Test Name

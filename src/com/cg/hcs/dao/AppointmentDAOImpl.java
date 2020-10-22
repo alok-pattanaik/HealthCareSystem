@@ -16,16 +16,29 @@ import com.cg.hcs.entity.Appointment;
 import com.cg.hcs.entity.DiagnosticCenter;
 import com.cg.hcs.entity.Test;
 import com.cg.hcs.entity.Users;
-import com.cg.hcs.exception.HCSException;
+import com.cg.hcs.exception.AppointmentException;
 import com.cg.hcs.utility.JpaUtility;
 import com.cg.hcs.utility.QueryConstants;
 
+/************************
+ * @description - This class deals with all the methods related to Appointment in the database
+ * @author - Pratik Prakash, Yashaswini, Bhavani, Reshma
+ * */
 public class AppointmentDAOImpl implements IAppointmentDAO
 {
 	static final EntityManagerFactory factory = JpaUtility.getFactory();
 	static final Logger LOGGER = Logger.getLogger(AppointmentDAOImpl.class);
 	
-	public final void deleteAppointmentByCenter(String centerId) throws HCSException
+	/***********************************
+	 * 
+	 * @Description : To delete all the appointments under a particular center
+	 * @Author : Pratik Prakash
+	 * @arg1 : String (center Id of the center)
+	 * 
+	 * @returns: void
+	 * @Exception : AppointmentException
+	 ***********************************/
+	public void deleteAppointmentByCenter(String centerId) throws AppointmentException
 	{
 		EntityManager manager = factory.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
@@ -39,7 +52,7 @@ public class AppointmentDAOImpl implements IAppointmentDAO
 		}
 		catch(PersistenceException e)
 		{
-			throw new HCSException("Error while deleting appointments for center : "+centerId+" due to "+e.getMessage());
+			throw new AppointmentException("Error while deleting appointments for center : "+centerId+" due to "+e.getMessage());
 		}
 		finally
 		{
@@ -47,7 +60,16 @@ public class AppointmentDAOImpl implements IAppointmentDAO
 		}
 	}
 	
-	public final void deleteAppointmentByTest(String testId) throws HCSException
+	/***********************************
+	 * 
+	 * @Description : To delete all the appointments under a particular test
+	 * @Author : Pratik Prakash
+	 * @arg1 : String (test Id of the test)
+	 * 
+	 * @returns: void
+	 * @Exception : AppointmentException
+	 ***********************************/
+	public void deleteAppointmentByTest(String testId) throws AppointmentException
 	{
 		EntityManager manager = factory.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
@@ -61,7 +83,7 @@ public class AppointmentDAOImpl implements IAppointmentDAO
 		}
 		catch (PersistenceException e) 
 		{
-			throw new HCSException("Error while deleting appointments for test : "+testId+"due to "+e.getMessage());
+			throw new AppointmentException("Error while deleting appointments for test : "+testId+"due to "+e.getMessage());
 		}
 		finally
 		{
@@ -69,16 +91,17 @@ public class AppointmentDAOImpl implements IAppointmentDAO
 		}
 	}
 	
-	/* This method is used to approve or reject an appointment of a test existing in the database
-	 * Author - Yashaswini
+	/*********************** 
+	 * @description - This method is used to approve or reject an appointment of a test existing in the database
+	 * @author - Yashaswini
 	 * 
-	 * Argument - int - Appointment Id of the appointment, char - The app status to which the appointment will update
+	 * @param - int - Appointment Id of the appointment, char - The app status to which the appointment will update
 	 * 
-	 * return type - boolean - Whether or not the appointment's status is changed
+	 * @return - boolean - Whether or not the appointment's status is changed
 	 * 
-	 * Exception : HCSException */
+	 * Exception : AppointmentException */
 	@Override
-	public boolean approveRejectAppointment(int appId,char appStatus) throws HCSException 
+	public boolean approveRejectAppointment(int appId,char appStatus) throws AppointmentException 
 	{
 		EntityManager manager = factory.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
@@ -98,7 +121,7 @@ public class AppointmentDAOImpl implements IAppointmentDAO
 			LOGGER.warn("Error while Approving or rejecting the appointment.");
 			if(transaction.isActive())
 				transaction.rollback();
-			throw new HCSException("Cannot find appointment"+ e.getMessage());
+			throw new AppointmentException("Cannot find appointment"+ e.getMessage());
 		}
 		finally
 		{
@@ -106,16 +129,17 @@ public class AppointmentDAOImpl implements IAppointmentDAO
 		}	
 	}
 	
-	/* This method is used to retrieve all the appointments existing in a center in the database
-	 * Author - Yashaswini
+	/*************************
+	 * @description - This method is used to retrieve all the appointments existing in a center in the database
+	 * @author - Yashaswini
 	 * 
-	 * Argument - String - center Id for which all the appointments are to be retrieved
+	 * @param - String - center Id for which all the appointments are to be retrieved
 	 * 
-	 * return type - List of Appointments under that particular center
+	 * @return - List of Appointments under that particular center
 	 * 
-	 * Exception : HCSException */
+	 * @exception : AppointmentException */
 	@Override
-	public List<Appointment> viewAllAppointmentsByCenter(String centerId) throws HCSException 
+	public List<Appointment> viewAllAppointmentsByCenter(String centerId) throws AppointmentException 
 	{
 		EntityManager manager = factory.createEntityManager();
 		try
@@ -129,7 +153,7 @@ public class AppointmentDAOImpl implements IAppointmentDAO
 		catch (PersistenceException e) 
 		{
 			LOGGER.warn("Error while retriving all appointments under a center.");
-			throw new HCSException("Error while retreiving all appointments"+ e.getMessage());
+			throw new AppointmentException("Error while retreiving all appointments"+ e.getMessage());
 		}
 		finally
 		{
@@ -142,13 +166,13 @@ public class AppointmentDAOImpl implements IAppointmentDAO
 	 * 
 	 * @Description : Method to book an appointment
 	 * @Author : Bhavani
-	 * @arg1 : Appointment
+	 * @arg1 : Appointment object
 	 * 
 	 * @returns: int
-	 * @Exception : HCSException
+	 * @Exception : AppointmentException
 	 ***********************************/
 	@Override
-	public int makeAppointment(Appointment appointment)  throws HCSException
+	public int makeAppointment(Appointment appointment)  throws AppointmentException
 	{
 
 		EntityManager manager = factory.createEntityManager();
@@ -172,7 +196,7 @@ public class AppointmentDAOImpl implements IAppointmentDAO
 			
 			if (transaction.isActive())
 				transaction.rollback();
-			throw new HCSException("Error while making appointment" +e.getMessage());
+			throw new AppointmentException("Error while making appointment" +e.getMessage());
 			
 		} finally {
 			manager.close();
@@ -187,12 +211,12 @@ public class AppointmentDAOImpl implements IAppointmentDAO
 	 * @arg1 : String
 	 * 
 	 * @returns: List<Appointment>
-	 * @Exception : HCSException
+	 * @Exception : AppointmentException
 	 * 
 	 ***********************************/
 	@Transactional
 	@Override
-	public List<Appointment> getAppointmentStatus(Users user) throws HCSException {
+	public List<Appointment> getAppointmentStatus(Users user) throws AppointmentException {
 
 		EntityManager manager = factory.createEntityManager();
 		List<Appointment> appointmentList = null;
@@ -206,7 +230,7 @@ public class AppointmentDAOImpl implements IAppointmentDAO
 			return appointmentList;
 		} catch (PersistenceException e) {
 			LOGGER.info("Error while fetching the status of appointment by customer.");
-			throw new HCSException("Error while retrieving all appointments");
+			throw new AppointmentException("Error while retrieving all appointments");
 		} finally {
 			manager.close();
 		}

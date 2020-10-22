@@ -8,7 +8,7 @@ import com.cg.hcs.dao.AppointmentDAOImpl;
 import com.cg.hcs.dao.IAppointmentDAO;
 import com.cg.hcs.entity.Appointment;
 import com.cg.hcs.entity.Users;
-import com.cg.hcs.exception.HCSException;
+import com.cg.hcs.exception.AppointmentException;
 
 public class AppointmentServiceImpl implements IAppointmentService
 {
@@ -21,7 +21,7 @@ public class AppointmentServiceImpl implements IAppointmentService
 	 * @arg1 : Appointment, char
 	 * 
 	 * @returns: boolean
-	 * @Exception : HCSException
+	 * @Exception : AppointmentException
 	 * 
 	 ***********************************/
 	@Override
@@ -32,7 +32,7 @@ public class AppointmentServiceImpl implements IAppointmentService
 		{
 			return appointmentDAO.approveRejectAppointment(appId, appStatus);
 		}
-		catch (HCSException e) 
+		catch (AppointmentException e) 
 		{
 			LOGGER.error(e.getMessage());
 		}
@@ -45,8 +45,8 @@ public class AppointmentServiceImpl implements IAppointmentService
 	 * @Author : Yashaswini
 	 * @arg1 : DiagnosticCenter
 	 * 
-	 * @returns: List<Appointment>
-	 * @Exception : HCSException
+	 * @return : List<Appointment>
+	 * @Exception : AppointmentException
 	 ***********************************/
 	@Override
 	public List<Appointment> viewAllAppointmentsByCenter(String centerId)
@@ -56,7 +56,7 @@ public class AppointmentServiceImpl implements IAppointmentService
 		{
 			return appointmentDAO.viewAllAppointmentsByCenter(centerId);
 		}
-		catch (HCSException e) 
+		catch (AppointmentException e) 
 		{
 			LOGGER.error(e.getMessage());
 		}
@@ -70,7 +70,7 @@ public class AppointmentServiceImpl implements IAppointmentService
 	 * @arg1 : Appointment
 	 * 
 	 * @returns: int
-	 * @Exception : HCSException
+	 * @Exception : AppointmentException
 	 ***********************************/
 	@Override
 	public int makeAppointment(Appointment appointment) 
@@ -80,7 +80,7 @@ public class AppointmentServiceImpl implements IAppointmentService
 		{
 			return appointmentDAO.makeAppointment(appointment);
 		} 
-		catch (HCSException e) 
+		catch (AppointmentException e) 
 		{
 			LOGGER.error(e.getMessage());
 		}
@@ -94,7 +94,7 @@ public class AppointmentServiceImpl implements IAppointmentService
 	 * @arg1 : String
 	 * 
 	 * @returns: List<Appointment>
-	 * @Exception : HCSException
+	 * @Exception : AppointmentException
 	 ***********************************/
 	@Override
 	public List<Appointment> getAppointmentStatus(Users user)
@@ -104,7 +104,7 @@ public class AppointmentServiceImpl implements IAppointmentService
 		{
 			return appointmentDAO.getAppointmentStatus(user);
 		} 
-		catch (HCSException e) 
+		catch (AppointmentException e) 
 		{	
 			LOGGER.error(e.getMessage());
 		}

@@ -55,7 +55,7 @@ public class CreateCenterServlet extends HttpServlet
 			}
 			else
 			{
-				LOGGER.info("Created center Successfully.");
+				LOGGER.info("Center creation failed.");
 				request.setAttribute("centerId","Center could not get created. Please Try Again.");
 				request.getRequestDispatcher("adminHomePage.jsp").include(request, response);
 			}

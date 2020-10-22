@@ -59,7 +59,7 @@ else {
 				<tr>
 					<td>Username</td>
 					<td>:</td>
-					<td><input type="text" id="username" name="username" pattern="[A-Z][A-za-z ]*" minlength="5" maxlength="20" title="Start with capital letter. Minimum length : 5, Maximum length : 14" required></td>
+					<td><input type="text" id="username" name="username" pattern="[A-Z][A-Za-z ]*" minlength="5" maxlength="20" title="Start with capital letter. Minimum length : 5, Maximum length : 14" required></td>
 
 				</tr>
 				<tr>

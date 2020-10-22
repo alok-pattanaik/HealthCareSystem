@@ -31,7 +31,7 @@
 	</div>
 	</header>
 	<!-- <div style="overflow: auto; height: 90%; max-height: 500px"> -->
-		<div class="tableFixHead">
+		<div class="tableFixHead" style="margin-top:20px">
 			<center>
 				<table border="4" ,class="table-style" cellpadding="15%">
 					<tr class="table-heading">

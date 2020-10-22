@@ -14,15 +14,29 @@ import org.apache.log4j.Logger;
 import com.cg.hcs.entity.DiagnosticCenter;
 import com.cg.hcs.entity.Test;
 import com.cg.hcs.exception.HCSException;
+import com.cg.hcs.exception.TestException;
 import com.cg.hcs.utility.JpaUtility;
 import com.cg.hcs.utility.QueryConstants;
 
+/************************
+ * @description - This class deals with all the methods related to com.cg.hcs.entity.Test in the database
+ * @author - Pratik Prakash, Alok Pattnaik
+ * */
 public class TestDAOImpl  implements ITestDAO
 {
 	static final EntityManagerFactory factory = JpaUtility.getFactory();
 	static final Logger LOGGER = Logger.getLogger(TestDAOImpl.class);
 	
-	public final void deleteTests (String centerId) throws HCSException
+	/***********************************
+	 * 
+	 * @Description : To delete all the tests under a particular center
+	 * @Author : Pratik Prakash
+	 * @arg1 : String (center Id of the center)
+	 * 
+	 * @returns: void
+	 * @Exception : TestException
+	 ***********************************/
+	public void deleteTests (String centerId) throws TestException
 	{
 		EntityManager manager = factory.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
@@ -36,7 +50,7 @@ public class TestDAOImpl  implements ITestDAO
 		}
 		catch (PersistenceException e)
 		{
-			throw new HCSException("Error while deleting tests for center : "+centerId+" due to "+e.getMessage());
+			throw new TestException("Error while deleting tests for center : "+centerId+" due to "+e.getMessage());
 		}
 		finally
 		{
@@ -44,16 +58,18 @@ public class TestDAOImpl  implements ITestDAO
 		}
 	}
 	
-	/* This method is used to add a new Test to a center in the database
-	 * Author - Alok Pattanaik
+	/*********************
+	 * @Description This method is used to add a new Test to a center in the database
+	 * @Author : Alok Pattanaik
 	 * 
-	 * Argument - Test object to be added
+	 * @param - Test object to be added
 	 * 
-	 * return type - String which is the test Id of the newly created test
+	 * @return - String which is the test Id of the newly created test
 	 * 
-	 * Exception : HCSException */
+	 * @exception : HCSException 
+	 * *********************/
 	@Override
-	public String addTest(Test test) throws HCSException 
+	public String addTest(Test test) throws TestException 
 	{
 		EntityManager manager = factory.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
@@ -74,7 +90,7 @@ public class TestDAOImpl  implements ITestDAO
 			if(transaction.isActive())
 				transaction.rollback();
 			e.printStackTrace();
-			throw new HCSException("Error while commiting the transaction"+ e.getMessage());
+			throw new TestException("Error while adding the test due to "+ e.getMessage());
 		}
 		finally
 		{
@@ -83,14 +99,16 @@ public class TestDAOImpl  implements ITestDAO
 		return test.getTestId();
 	}
 	
-	/* This method is used to delete a Test existing in a center in the database
-	 * Author - ALok Pattanaik, Pratik Prakash
+	/************************
+	 *  @Description This method is used to delete a Test existing in a center in the database
+	 * @author -  Pratik Prakash
 	 * 
-	 * Argument - Test object which is to be deleted
+	 * @param - Test object which is to be deleted
 	 * 
-	 * return type - boolean - Whether or not the test is deleted
+	 * @return - boolean - Whether or not the test is deleted
 	 * 
-	 * Exception : HCSException */
+	 * Exception : HCSException
+	 * ***********************/
 	@Override
 	public boolean removeTest(String testId) throws HCSException 
 	{
@@ -111,7 +129,7 @@ public class TestDAOImpl  implements ITestDAO
 		catch (PersistenceException e) 
 		{
 			LOGGER.warn("Error while removing test.");
-			throw new HCSException("Error while removing test"+e.getMessage());
+			throw new TestException("Error while removing test due to "+e.getMessage());
 		}
 		finally
 		{
@@ -123,16 +141,17 @@ public class TestDAOImpl  implements ITestDAO
 	
 	
 	
-	/* This method is used to retrieve all the tests existing in a center in the database
-	 * Author - Pratik Prakash
+	/*******************
+	 * @description - This method is used to retrieve all the tests existing in a center in the database
+	 * @author - Pratik Prakash
 	 * 
-	 * Argument - String - center Id for which all the tests are to be retrieved
+	 * @param - String - center Id for which all the tests are to be retrieved
 	 * 
-	 * return type - List of Tests under that particular center
+	 * @return - List of Tests under that particular center
 	 * 
-	 * Exception : HCSException */
+	 * @exception : TestException */
 	@Override
-	public List<Test> viewAllTest(String centerId) throws HCSException 
+	public List<Test> viewAllTest(String centerId) throws TestException 
 	{
 		EntityManager manager = factory.createEntityManager();
 		List<Test> listOfTests = null;
@@ -149,7 +168,7 @@ public class TestDAOImpl  implements ITestDAO
 		catch (PersistenceException e) 
 		{
 			LOGGER.warn("Error while retriving all the test under a particular ceter.");
-			throw new HCSException("Error while retreiving all tests");
+			throw new TestException("Error while retreiving all tests");
 		}
 	}
 }

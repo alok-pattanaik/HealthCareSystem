@@ -5,6 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript">
+	window.history.forward();
+	function noBack()
+	{
+		window.history.forward();
+	}
+</script>
 <meta charset="ISO-8859-1">
 <title>Login</title>
 
@@ -36,6 +43,11 @@
 			style="width: 100%; height: 82%;position:absolute"></img>
 
 	</div>
+	<%
+		if(session.getAttribute("userId")!=null){
+			session.invalidate();
+		}
+	%>
 	<div class="box">
 		<h1>Login</h1>
 		<%if(request.getAttribute("loginStatusFailed")!=null){%>
@@ -47,12 +59,12 @@
 				<tr>
 					<td>UserId</td>
 					<td>:</td>
-					<td><input type="text" name="userid"></input></td>
+					<td><input type="text" name="userid" required></input></td>
 				</tr>
 				<tr>
 					<td>Password</td>
 					<td>:</td>
-					<td><input type="password" name="password"></input></td>
+					<td><input type="password" name="password" required></input></td>
 				</tr>
 			</table>
 			<center>

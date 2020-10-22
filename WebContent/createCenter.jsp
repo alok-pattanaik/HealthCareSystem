@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Create Center</title>
 <link rel="stylesheet" type " text/css" href="css/LoginRegister.css">
 <link rel="stylesheet" type " text/css" href="css/showCenters.css">
 </head>
@@ -36,7 +36,7 @@
 			<table>
 				<tr class="">
 					<td>Center Name :
-					<td><input type="text" name="centerName" pattern="[A-za-z]*" minlength="5" maxlength="20" title="Start with capital letter. Minimum length : 5, Maximum length : 14" required>
+					<td><input type="text" name="centerName" pattern="[A-Z][A-Za-z ]*" minlength="5" maxlength="20" title="Start with capital letter. Minimum length : 5, Maximum length : 14" required>
 				<tr>
 					<td>Center Address
 					<td><textarea name="centerAddress"

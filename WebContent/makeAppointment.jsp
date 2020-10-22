@@ -84,7 +84,7 @@ $("#sdatepicker").datepicker({
 				</tr>
 				<tr>
 					<td>Time</td>
-					<td><input type="time" name="time" id="time" /></td>
+					<td><input type="time" name="time" id="time" min="08:00" max="22:00"/></td>
 				</tr>
 
 			</table>

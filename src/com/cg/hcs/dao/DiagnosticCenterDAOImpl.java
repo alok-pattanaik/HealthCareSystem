@@ -12,25 +12,32 @@ import javax.persistence.TypedQuery;
 import org.apache.log4j.Logger;
 
 import com.cg.hcs.entity.DiagnosticCenter;
+import com.cg.hcs.exception.DiagnosticCenterException;
 import com.cg.hcs.exception.HCSException;
 import com.cg.hcs.utility.JpaUtility;
 import com.cg.hcs.utility.QueryConstants;
 
+/************************
+ * @description - This class deals with all the methods related to Appointment in the database
+ * @author - Pratik Prakash, Bhavani, Alok Pattnaik
+ * */
 public class DiagnosticCenterDAOImpl implements IDiagnosticCenterDAO
 {
 	static final EntityManagerFactory factory = JpaUtility.getFactory();
 	static final Logger LOGGER = Logger.getLogger(DiagnosticCenterDAOImpl.class);
 	
-	/* This method is used to add a new Diagnostic Center to the database
-	 * Author- Pratik Prakash
+	/************************* 
+	 * @description - This method is used to add a new Diagnostic Center to the database
+	 * @author - Pratik Prakash
 	 * 
-	 * Argument - DiagnosticCenter object to be added in the database
+	 * @param - DiagnosticCenter object to be added in the database
 	 * 
-	 * return type - String which is the center Id of the newly created center
+	 * @return - String which is the center Id of the newly created center
 	 * 
-	 * Exception : HCSException */
+	 * @exception : HCSException 
+	 **************************/
 	@Override
-	public String addCenter(DiagnosticCenter center) throws HCSException 
+	public String addCenter(DiagnosticCenter center) throws DiagnosticCenterException 
 	{
 		EntityManager manager = factory.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
@@ -47,7 +54,7 @@ public class DiagnosticCenterDAOImpl implements IDiagnosticCenterDAO
 			LOGGER.warn("Error while adding the center.");
 			if(transaction.isActive())
 				transaction.rollback();
-			throw new HCSException("Error while commiting the transaction"+ e.getMessage());
+			throw new DiagnosticCenterException("Error while commiting the transaction due to"+ e.getMessage());
 			
 		}
 		finally 
@@ -61,13 +68,13 @@ public class DiagnosticCenterDAOImpl implements IDiagnosticCenterDAO
 	
 	/******************************************************* 
 	 * @Description - This method is used to delete a Diagnostic Center existing in the database
-	 * @author PratikPrakash
+	 * @author - Pratik Prakash
 	 * 
-	 * Argument - String centerId of the diagnostic center which is to be deleted
+	 * @param - String centerId of the diagnostic center which is to be deleted
 	 * 
-	 * return type - boolean - Whether or not the center is deleted
+	 * @return - boolean - Whether or not the center is deleted
 	 * 
-	 * Exception : HCSException 
+	 * @exception : HCSException 
 	 * ******************************************************/
 	@Override
 	public boolean deleteCenter(String centerId) throws HCSException 
@@ -93,7 +100,7 @@ public class DiagnosticCenterDAOImpl implements IDiagnosticCenterDAO
 		catch (PersistenceException e) 
 		{
 			LOGGER.warn("Error while deleting a center.");
-			throw new HCSException("Error while removing the center" + e.getMessage());
+			throw new DiagnosticCenterException("Error while removing the center due to " + e.getMessage());
 		}
 		finally
 		{
@@ -114,7 +121,7 @@ public class DiagnosticCenterDAOImpl implements IDiagnosticCenterDAO
 	 ***********************************/
 
 	@Override
-	public List<DiagnosticCenter> getDiagnosticCentersListByLocation(String centerAddress) throws HCSException {
+	public List<DiagnosticCenter> getDiagnosticCentersListByLocation(String centerAddress) throws DiagnosticCenterException {
 		EntityManager manager = factory.createEntityManager();
 		List<DiagnosticCenter> centersList = null;
 		try
@@ -130,7 +137,7 @@ public class DiagnosticCenterDAOImpl implements IDiagnosticCenterDAO
 		{
 			LOGGER.info("Error while fetching the diagnostic centers list by location ");
 			
-			throw new HCSException("Error while fetching centers List by location");
+			throw new DiagnosticCenterException("Error while fetching centers List by location due to "+e.getMessage());
 		} 
 		finally
 		{
@@ -140,16 +147,17 @@ public class DiagnosticCenterDAOImpl implements IDiagnosticCenterDAO
 		return centersList;
 	}
 	
-	/* This method is used to retrieve all the centers in the database
-	 * Author - Alok Pattanaik
+	/******************************
+	 * @description -  This method is used to retrieve all the centers in the database
+	 * @author - Alok Pattanaik
 	 * 
-	 * No Arguments
+	 * @param - No Arguments
 	 * 
-	 * return type - List of all Diagnostic Centers
+	 * @return - List<DiagnosticCenter> of all Diagnostic Centers
 	 * 
-	 * Exception : HCSException */
+	 * @exception : DiagnosticCenterException */
 	@Override
-	public List<DiagnosticCenter> viewAllCenters() throws HCSException 
+	public List<DiagnosticCenter> viewAllCenters() throws DiagnosticCenterException 
 	{
 		EntityManager manager = factory.createEntityManager();
 		List<DiagnosticCenter> centersList = null;
@@ -163,7 +171,7 @@ public class DiagnosticCenterDAOImpl implements IDiagnosticCenterDAO
 		catch (PersistenceException e)
 		{
 			LOGGER.warn("Error while retriving all centers.");
-			throw new HCSException("Error retrieving centers list");
+			throw new DiagnosticCenterException("Error retrieving centers list due to "+e.getMessage());
 		}
 		finally 
 		{

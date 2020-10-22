@@ -3,8 +3,6 @@ package com.cg.hcs.service;
 import org.apache.log4j.Logger;
 
 import com.cg.hcs.dao.IUserDAO;
-import com.cg.hcs.dao.IUserDAO;
-import com.cg.hcs.dao.UserDAOImpl;
 import com.cg.hcs.dao.UserDAOImpl;
 import com.cg.hcs.entity.Users;
 import com.cg.hcs.exception.HCSException;

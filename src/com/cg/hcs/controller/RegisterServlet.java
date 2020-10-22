@@ -70,10 +70,13 @@ public class RegisterServlet extends HttpServlet {
 				
 				session.setAttribute("userId", userId);
 				request.setAttribute("userRegistered", "User registered successfully with id : "+userId);
-				dispatcher = request.getRequestDispatcher("registration.jsp");
-				dispatcher.forward(request, response);
+				
 			}
-
+			else {
+				request.setAttribute("userRegistered", "User already exist! ");
+			}
+			dispatcher = request.getRequestDispatcher("registration.jsp");
+			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			LOGGER.warn("Error in Register servlet.");
 			System.out.println("In registerServlet."+e.getMessage());

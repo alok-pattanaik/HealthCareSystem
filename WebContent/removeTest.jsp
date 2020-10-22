@@ -45,9 +45,9 @@
 		if(listOfTests!=null)
 		{
 			%>
-			<div class="box">
+			<div class="box" style="width:90%">
 			<h1>Center : <%=centerId %></h1>
-			<table border="4" ,class="table-style" cellpadding="15%">
+			<table border="4" ,class="table-style" cellpadding="15%" style="width:100%">
 			<tr class="table-heading">
 			<th>Test Id
 			<th>Test Name
