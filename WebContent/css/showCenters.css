@@ -1,0 +1,114 @@
+.table-div {
+	margin-top: 7%;
+}
+
+.table-style {
+	text-align: center;
+	font-size: 25px;
+	width: 30%;
+	margin-left: 14%;
+	border: 1px solid #CCC;
+	margin-top: 100%;
+	border-radius: 5px;
+}
+
+.table-heading {
+	background-color: #35424a;
+	color: #e45750;
+	font-family: "Times New Roman";
+	
+}
+.table-row {
+	color: black;
+	background-color: #CFF2F6;
+}
+
+
+.caption {
+	color: rgb(47, 58, 74);
+	font-size: 250%;
+	text-align: center;
+	font-family: "Times New Roman";
+	font-weight: bolder;
+	text-shadow: 2px 2px rgb(47, 98, 74);
+	margin-bottom: 3%;
+}
+
+.table-row:hover {
+	/* background:#c0c0c0; */
+	background: #85E6F2;
+	color: black;
+}
+
+
+.search-box {
+	width: 700px;
+	padding: 0%;
+	margin-top: 3%;
+	margin-left: 2%;
+}
+
+.centers input {
+	width: 320px;
+	margin-bottom: 20px;
+}
+
+.centers input[type="text"], input[type="password"], input[type="tel"],
+	input[type="email"] {
+	border: none;
+	border-bottom: 1px solid #ffffff;
+	background: transparent;
+	outline: none;
+	height: 30px;
+	color: #000000;
+	font-size: 16px;
+}
+
+.centers {
+	width: 500px;
+	height: 10%;
+	background: rgba(240,240,240,240);
+	color: black;
+	top: 20%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%, -50%);
+	box-sizing: border-box;
+	margin-top: 1%;
+}
+
+.centers input[type="submit"] {
+	border: none;
+	outline: none;
+	height: 35px;
+	left: 50%;
+	width: 80px;
+	background: #1c8adb;
+	color: #ggg;
+	font-size: 18px;
+	border-radius: 20px;
+}
+
+.centers input[type="submit"]:hover {
+	cursor: pointer;
+	background: #39dc79;
+	color: #000;
+}
+
+.centers a {
+	text-decoration: none;
+	font-size: 14px;
+	color: #fff;
+}
+
+.centers a:hover {
+	color: #39dc79
+}
+
+.tableFixHead          { overflow-y: auto; height: 500px; }
+.tableFixHead thead th { position: sticky; top: 0; }
+
+/* Just common table stuff. Really. */
+table  { border-collapse: collapse; width: 60%; }
+th, td { padding: 8px 16px; }
+th     { background:#FFFFFF; }

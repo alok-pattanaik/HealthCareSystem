@@ -1,0 +1,249 @@
+@CHARSET "ISO-8859-1";
+@CHARSET "UTF-8";body {
+    margin: 0;
+	padding:0;
+	//background:url(imagebackground.jpg);
+	background-size:cover;
+	font-family:sans-serif;
+	}
+.box {
+	width:370px;
+	height:440px;
+	background:rgba(0.3, 0.3, 0.3, 0.3);
+	color:#fff;
+	top:50%;
+	left:50%;
+	position:absolute;
+	transform:translate(-50%,-50%);
+	box-sizing:border-box;
+	padding:70px 30px;
+	margin-top:1%;
+}
+.box1 {
+	width:400px;
+	height:370px;
+	background:rgba(0.3, 0.3, 0.3, 0.3);
+	color:#fff;
+	top:50%;
+	left:50%;
+	position:absolute;
+	transform:translate(-50%,-50%);
+	box-sizing:border-box;
+	padding:70px 30px;
+	margin-top:1%;
+}
+.avatar {
+	width: 100px;
+	height:100px;
+	border-radius: 50%;
+	position:absolute;
+	top: -50px;
+	left: calc(50% - 50px);
+}
+h1 {
+	margin:0;
+	padding:0 0 20px;
+	text-align: center;
+	font-size: 22px;
+}
+.box p {
+	margin:0;
+	padding:0;
+	font-weight: bold;
+}
+.box input{
+	width: 100%;
+	margin-bottom:20px;
+}
+.box input[type = "text"],input[type = "password"],input[type = "tel"],input[type = "email"]
+{
+	border:none;
+	border-bottom:1px solid #fff;
+	background:transparent;
+	outline:none;
+	height:30px;
+	color:#fff;
+	font-size:16px;
+}
+.box input[type="submit"] {
+	border:none;
+	outline:none;
+	height:50px;
+	left:50%;
+	width:100px;
+	background:#1c8adb;
+	color:#ggg;
+	font-size:18px;
+	border-radius:20px;
+}
+.box select {
+	border:none;
+	outline:none;
+	height:30px;
+	width: 200px;
+	background:#509050;
+	color:#fff;
+	font-size:18px;
+	border-radius:20px;
+}
+
+.box input[type="submit"]:hover {
+	cursor:pointer;
+	background:#39dc79;
+	color:#000;
+}
+.box a{
+	text-decoration:none;
+	font-size:14px;
+	color:#fff;
+}
+.box a:hover {
+	color: #39dc79
+}
+.box1 p {
+	margin:0;
+	padding:0;
+	font-weight: bold;
+}
+.box1 input{
+	width: 100%;
+	margin-bottom:20px;
+}
+.box1 input[type = "text"]
+{
+	border:none;
+	border-bottom:1px solid #fff;
+	background:transparent;
+	outline:none;
+	height:30px;
+	color:#fff;
+	font-size:16px;
+}
+.box1 input[type="submit"] {
+	border:none;
+	outline:none;
+	height:50px;
+	left:50%;
+	width:100px;
+	background:#1c8adb;
+	color:#ggg;
+	font-size:18px;
+	border-radius:20px;
+}
+
+.box1 input[type="submit"]:hover {
+	cursor:pointer;
+	background:#39dc79;
+	color:#000;
+}
+.box1 a{
+	text-decoration:none;
+	font-size:14px;
+	color:#fff;
+}
+.box1 a:hover {
+	color: #39dc79
+}
+
+/* Welcome page css header and footer */
+
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700|Pacifico");
+		body {
+			font: 15px/1.5 Arial,Helvetica, sans-serif;
+			padding:0;
+			margin:0;
+			background-color:#f4f4f4;
+		}
+		#header .logo {
+			font-family: 'Pacifico', cursive;
+			display: inline-block;
+			height: inherit;
+			left: 0;
+			line-height: inherit;
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			top: 0;
+			color: #e5474b;
+			font-size: 1.75em;
+			text-transform: none;
+			font-weight: normal;
+			padding: 0;
+		}
+		#header .container {
+			font-family: 'Pacifico', cursive;
+			display: inline-block;
+			height: inherit;
+			left: 0;
+			line-height: inherit;
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			top: 0;
+			margin-top:1%;
+			margin-left:10%;
+			color: #e5474b;
+			font-size: 1.7em;
+			text-transform: none;
+			font-weight: normal;
+			padding: 0;
+		}
+
+		
+		.container{
+			width:80%;
+			margin:auto;
+			overflow:hidden;
+		}
+		ul{
+			margin:0;
+			padding:0;		
+		}
+		
+		header{
+			background:#35424a;
+			color:#ffffff;
+			padding-top:30px;
+			min-height:70px;
+			border-bottom:#e8491d 3px solid;
+		}	
+		header a {
+			color:#ffffff;
+			text-decoration:none;
+			/*text-transform:uppercase;*/
+			font-size:25px;
+		}			
+		
+		header li{
+			float:left;
+			display:inline;
+			padding:0 20px 0 20px ;
+		}
+		header #branding{
+			float:left;
+		}
+		header #branding h1{
+			margin:0;
+		}
+		
+		header nav {
+			float:right;
+			margin-top:30px;
+		}
+		header .highlight, header .current a {
+			color:#e8491d;
+			font-weight:bold;
+		}
+		header a:hover{
+			color:#cccccc;
+			font-weight:bold;
+		}
+		
+		footer {
+			padding:10px;
+			margin-top:37%;
+			color:#ffffff;
+			background-color:#e8491d;
+			text-align:center;
+			
+		}
